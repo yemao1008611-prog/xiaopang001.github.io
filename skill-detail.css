@@ -155,3 +155,69 @@
 }
 
 .skill-card-info li
+/* 子技能卡片 */
+.subskill-card {
+    background: white;
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-color);
+}
+
+.subskill-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.subskill-icon {
+    font-size: 2rem;
+}
+
+.subskill-header h3 {
+    font-size: 1.25rem;
+    color: var(--text-dark);
+}
+
+.subskill-desc {
+    color: var(--text-light);
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+
+.subskill-scenes {
+    background: var(--bg-light);
+    padding: 1rem;
+    border-radius: var(--radius-md);
+}
+
+.subskill-scenes h4 {
+    font-size: 0.875rem;
+    color: var(--primary-color);
+    margin-bottom: 0.75rem;
+    font-weight: 600;
+}
+
+.subskill-scenes ul {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+}
+
+.subskill-scenes li {
+    color: var(--text-light);
+    font-size: 0.85rem;
+    padding-left: 1rem;
+    position: relative;
+}
+
+.subskill-scenes li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: var(--primary-color);
+}
