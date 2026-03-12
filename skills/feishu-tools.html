@@ -9,7 +9,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- 导航栏 -->
     <nav class="navbar">
         <div class="container">
             <div class="logo">
@@ -26,7 +25,6 @@
         </div>
     </nav>
 
-    <!-- 技能详情 Hero -->
     <section class="skill-hero">
         <div class="container">
             <div class="skill-hero-content">
@@ -43,11 +41,9 @@
         </div>
     </section>
 
-    <!-- 技能详情内容 -->
     <section class="skill-detail">
         <div class="container">
             <div class="skill-grid">
-                <!-- 左侧：技能介绍 -->
                 <div class="skill-main">
                     <div class="skill-section">
                         <h2>技能概述</h2>
@@ -73,6 +69,17 @@
                                         <li>群聊@所有人通知</li>
                                     </ul>
                                 </div>
+                                <div class="code-block">
+                                    <div class="code-header">
+                                        <span class="code-lang">OpenClaw</span>
+                                        <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                                    </div>
+                                    <div class="code-content"><pre><code>// 发送消息
+feishu_im_user_message action=send msg_type=text content='{"text":"你好"}' receive_id=ou_xxx receive_id_type=open_id
+
+// 搜索消息
+feishu_im_user_search_messages query="关键词" chat_type=p2p</code></pre></div>
+                                </div>
                             </div>
                         </div>
 
@@ -92,6 +99,17 @@
                                         <li>创建视频会议链接</li>
                                     </ul>
                                 </div>
+                                <div class="code-block">
+                                    <div class="code-header">
+                                        <span class="code-lang">OpenClaw</span>
+                                        <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                                    </div>
+                                    <div class="code-content"><pre><code>// 创建日程
+feishu_calendar_event action=create summary="周例会" start_time="2026-03-13T10:00:00+08:00" end_time="2026-03-13T11:00:00+08:00"
+
+// 查询忙闲
+feishu_calendar_freebusy action=list time_min="2026-03-13T09:00:00+08:00" time_max="2026-03-13T18:00:00+08:00" user_ids=ou_xxx</code></pre></div>
+                                </div>
                             </div>
                         </div>
 
@@ -101,7 +119,7 @@
                                 <h3>任务自动化</h3>
                             </div>
                             <div class="subskill-content">
-                                <p class="subskill-desc">任务创建、清单管理、子任务分解、评论互动</p>
+                                <p class="subskill-desc">任务创建、清单管理、子任务分解</p>
                                 <div class="subskill-scenes">
                                     <h4>应用场景</h4>
                                     <ul>
@@ -110,6 +128,17 @@
                                         <li>子任务自动分配</li>
                                         <li>任务评论自动同步</li>
                                     </ul>
+                                </div>
+                                <div class="code-block">
+                                    <div class="code-header">
+                                        <span class="code-lang">OpenClaw</span>
+                                        <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                                    </div>
+                                    <div class="code-content"><pre><code>// 创建任务
+feishu_task_task action=create summary="完成周报" due="2026-03-15T18:00:00+08:00"
+
+// 创建子任务
+feishu_task_subtask action=create task_guid=xxx summary="收集数据"</code></pre></div>
                                 </div>
                             </div>
                         </div>
@@ -120,7 +149,7 @@
                                 <h3>多维表格</h3>
                             </div>
                             <div class="subskill-content">
-                                <p class="subskill-desc">数据表管理、字段配置、记录 CRUD、视图切换</p>
+                                <p class="subskill-desc">数据表管理、字段配置、记录 CRUD</p>
                                 <div class="subskill-scenes">
                                     <h4>应用场景</h4>
                                     <ul>
@@ -130,31 +159,22 @@
                                         <li>多视图数据展示</li>
                                     </ul>
                                 </div>
-                            </div>
-                        </div>
+                                <div class="code-block">
+                                    <div class="code-header">
+                                        <span class="code-lang">OpenClaw</span>
+                                        <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                                    </div>
+                                    <div class="code-content"><pre><code>// 创建记录
+feishu_bitable_app_table_record action=create app_token=xxx table_id=xxx fields='{"名称":"测试","数量":10}'
 
-                        <div class="subskill-card">
-                            <div class="subskill-header">
-                                <span class="subskill-icon">📄</span>
-                                <h3>文档协作</h3>
-                            </div>
-                            <div class="subskill-content">
-                                <p class="subskill-desc">文档创建、编辑、评论、权限管理</p>
-                                <div class="subskill-scenes">
-                                    <h4>应用场景</h4>
-                                    <ul>
-                                        <li>自动生成周报文档</li>
-                                        <li>文档内容自动更新</li>
-                                        <li>添加文档评论</li>
-                                        <li>知识库内容同步</li>
-                                    </ul>
+// 查询记录
+feishu_bitable_app_table_record action=list app_token=xxx table_id=xxx</code></pre></div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- 右侧：快速入口 -->
                 <div class="skill-sidebar">
                     <div class="skill-card-info">
                         <h3>快速入口</h3>
@@ -165,20 +185,11 @@
                             <li><a href="web-tech.html">🌐 网页技术</a></li>
                         </ul>
                     </div>
-                    <div class="skill-card-info">
-                        <h3>相关案例</h3>
-                        <ul>
-                            <li>📝 成长日记自动化</li>
-                            <li>📊 麦当劳价格监控</li>
-                            <li>📋 任务提醒系统</li>
-                        </ul>
-                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- 页脚 -->
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
@@ -187,5 +198,17 @@
             </div>
         </div>
     </footer>
+    <script>
+    function copyCode(btn) {
+        const code = btn.closest('.code-block').querySelector('code').innerText;
+        navigator.clipboard.writeText(code);
+        btn.textContent = '已复制!';
+        btn.classList.add('copied');
+        setTimeout(() => {
+            btn.textContent = '复制';
+            btn.classList.remove('copied');
+        }, 2000);
+    }
+    </script>
 </body>
 </html>
