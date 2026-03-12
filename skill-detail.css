@@ -1,0 +1,157 @@
+/* 技能详情页样式 */
+
+.skill-hero {
+    padding: 8rem 0 4rem;
+    background: linear-gradient(135deg, #f5f7ff 0%, #fff 50%, #fef3f2 100%);
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+}
+
+.skill-hero-content {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.back-link {
+    display: inline-block;
+    color: var(--text-light);
+    text-decoration: none;
+    margin-bottom: 1.5rem;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.back-link:hover {
+    color: var(--primary-color);
+}
+
+.skill-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 2rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+}
+
+.skill-title {
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+}
+
+.skill-subtitle {
+    font-size: 1.25rem;
+    color: var(--text-light);
+    margin-bottom: 2rem;
+}
+
+.skill-meta {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.meta-item {
+    background: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 2rem;
+    box-shadow: var(--shadow-sm);
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.skill-detail {
+    padding: 4rem 0;
+}
+
+.skill-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 3rem;
+}
+
+.skill-main {
+    max-width: 800px;
+}
+
+.skill-section {
+    margin-bottom: 3rem;
+}
+
+.skill-section h2 {
+    font-size: 1.75rem;
+    margin-bottom: 1rem;
+    color: var(--text-dark);
+}
+
+.skill-section p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--text-light);
+}
+
+.capability-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.capability-item {
+    display: flex;
+    gap: 1rem;
+    padding: 1.5rem;
+    background: var(--bg-light);
+    border-radius: var(--radius-lg);
+    transition: transform 0.2s;
+}
+
+.capability-item:hover {
+    transform: translateX(8px);
+}
+
+.capability-icon {
+    font-size: 2.5rem;
+    flex-shrink: 0;
+}
+
+.capability-item h3 {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+}
+
+.capability-item p {
+    color: var(--text-light);
+    font-size: 0.95rem;
+}
+
+/* 侧边栏 */
+.skill-sidebar {
+    position: sticky;
+    top: 100px;
+    height: fit-content;
+}
+
+.skill-card-info {
+    background: var(--bg-light);
+    padding: 2rem;
+    border-radius: var(--radius-lg);
+    margin-bottom: 1.5rem;
+}
+
+.skill-card-info h3 {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+}
+
+.skill-card-info ul {
+    list-style: none;
+}
+
+.skill-card-info li
