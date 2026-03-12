@@ -69,6 +69,16 @@
                                         <li>动态内容抓取</li>
                                     </ul>
                                 </div>
+                                <div class="code-block">
+                                    <div class="code-header">
+                                        <span class="code-lang">OpenClaw</span>
+                                        <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                                    </div>
+                                    <div class="code-content"><pre><code># 浏览器自动化
+browser action=open url="https://example.com"
+browser action=act targetId=xxx kind=click
+browser action=snapshot targetId=xxx</code></pre></div>
+                                </div>
                             </div>
                         </div>
 
@@ -87,6 +97,17 @@
                                         <li>新闻资讯聚合</li>
                                         <li>搜索结果采集</li>
                                     </ul>
+                                </div>
+                                <div class="code-block">
+                                    <div class="code-header">
+                                        <span class="code-lang">Python</span>
+                                        <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                                    </div>
+                                    <div class="code-content"><pre><code># 使用 web_fetch 工具
+web_fetch url="https://example.com" maxChars=5000
+
+# 或使用 web_search
+web_search query="关键词" freshness=week</code></pre></div>
                                 </div>
                             </div>
                         </div>
@@ -107,6 +128,20 @@
                                         <li>Webhook 处理</li>
                                     </ul>
                                 </div>
+                                <div class="code-block">
+                                    <div class="code-header">
+                                        <span class="code-lang">Python</span>
+                                        <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                                    </div>
+                                    <div class="code-content"><pre><code>import requests
+
+# API 调用示例
+headers = {"Authorization": "Bearer YOUR_TOKEN"}
+response = requests.get(
+    "https://api.example.com/data",
+    headers=headers
+)</code></pre></div>
+                                </div>
                             </div>
                         </div>
 
@@ -126,6 +161,23 @@
                                         <li>GitHub Pages 部署</li>
                                     </ul>
                                 </div>
+                                <div class="code-block">
+                                    <div class="code-header">
+                                        <span class="code-lang">HTML</span>
+                                        <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                                    </div>
+                                    <div class="code-content"><pre><code><!DOCTYPE html>
+<html>
+<head>
+  <title>我的网站</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>你好，世界！</h1>
+  <script src="script.js"></script>
+</body>
+</html></code></pre></div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -141,14 +193,6 @@
                             <li><a href="automation.html">⚡ 自动化脚本</a></li>
                         </ul>
                     </div>
-                    <div class="skill-card-info">
-                        <h3>相关案例</h3>
-                        <ul>
-                            <li>🌐 小胖官网搭建</li>
-                            <li>🕸️ 竞品页面分析</li>
-                            <li>📱 网页自动化操作</li>
-                        </ul>
-                    </div>
                 </div>
             </div>
         </div>
@@ -162,5 +206,17 @@
             </div>
         </div>
     </footer>
+    <script>
+    function copyCode(btn) {
+        const code = btn.closest('.code-block').querySelector('code').innerText;
+        navigator.clipboard.writeText(code);
+        btn.textContent = '已复制!';
+        btn.classList.add('copied');
+        setTimeout(() => {
+            btn.textContent = '复制';
+            btn.classList.remove('copied');
+        }, 2000);
+    }
+    </script>
 </body>
 </html>

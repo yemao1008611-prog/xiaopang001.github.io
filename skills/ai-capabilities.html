@@ -47,7 +47,7 @@
                 <div class="skill-main">
                     <div class="skill-section">
                         <h2>技能概述</h2>
-                        <p>掌握多种人工智能能力，包括语音识别、语音合成、图像理解、智能对话等。能够理解图片内容、转录音频、生成语音，满足多种 AI 应用场景需求。</p>
+                        <p>掌握多种人工智能能力，包括语音识别、语音合成、图像理解，智能对话等。能够理解图片内容、转录音频、生成语音，满足多种 AI 应用场景需求。</p>
                     </div>
 
                     <div class="skill-section">
@@ -69,6 +69,17 @@
                                         <li>实时语音流识别</li>
                                     </ul>
                                 </div>
+                                <div class="code-block">
+                                    <div class="code-header">
+                                        <span class="code-lang">Shell</span>
+                                        <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                                    </div>
+                                    <div class="code-content"><pre><code># Whisper 转录命令
+~/.clawdbot/skills/local-whisper/scripts/transcribe.py audio.wav --model tiny
+
+# 带时间戳输出
+~/.clawdbot/skills/local-whisper/scripts/transcribe.py audio.wav --timestamps --json</code></pre></div>
+                                </div>
                             </div>
                         </div>
 
@@ -87,6 +98,20 @@
                                         <li>语音提醒播报</li>
                                         <li>多语言语音合成</li>
                                     </ul>
+                                </div>
+                                <div class="code-block">
+                                    <div class="code-header">
+                                        <span class="code-lang">Python</span>
+                                        <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                                    </div>
+                                    <div class="code-content"><pre><code>import edge_tts
+import asyncio
+
+async def tts():
+    communicate = edge_tts.Communicate("你好，这是语音合成", "zh-CN-XiaoxiaoNeural")
+    await communicate.save("output.mp3")
+
+asyncio.run(tts())</code></pre></div>
                                 </div>
                             </div>
                         </div>
@@ -107,24 +132,16 @@
                                         <li>二维码/文字识别</li>
                                     </ul>
                                 </div>
-                            </div>
-                        </div>
+                                <div class="code-block">
+                                    <div class="code-header">
+                                        <span class="code-lang">OpenClaw</span>
+                                        <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                                    </div>
+                                    <div class="code-content"><pre><code># 分析图片内容
+image image=/path/to/image.jpg prompt="描述这张图片的内容"
 
-                        <div class="subskill-card">
-                            <div class="subskill-header">
-                                <span class="subskill-icon">💭</span>
-                                <h3>智能对话</h3>
-                            </div>
-                            <div class="subskill-content">
-                                <p class="subskill-desc">基于大语言模型的智能对话能力</p>
-                                <div class="subskill-scenes">
-                                    <h4>应用场景</h4>
-                                    <ul>
-                                        <li>问答咨询服务</li>
-                                        <li>内容创作辅助</li>
-                                        <li>数据分析解读</li>
-                                        <li>代码编写调试</li>
-                                    </ul>
+# 提取图表数据
+image image=/path/to/chart.png prompt="提取图表中的数据"</code></pre></div>
                                 </div>
                             </div>
                         </div>
@@ -141,14 +158,6 @@
                             <li><a href="web-tech.html">🌐 网页技术</a></li>
                         </ul>
                     </div>
-                    <div class="skill-card-info">
-                        <h3>相关案例</h3>
-                        <ul>
-                            <li>🎙️ 飞书语音转文字</li>
-                            <li>🖼️ 抖省省界面分析</li>
-                            <li>🔊 语音提醒播报</li>
-                        </ul>
-                    </div>
                 </div>
             </div>
         </div>
@@ -162,5 +171,17 @@
             </div>
         </div>
     </footer>
+    <script>
+    function copyCode(btn) {
+        const code = btn.closest('.code-block').querySelector('code').innerText;
+        navigator.clipboard.writeText(code);
+        btn.textContent = '已复制!';
+        btn.classList.add('copied');
+        setTimeout(() => {
+            btn.textContent = '复制';
+            btn.classList.remove('copied');
+        }, 2000);
+    }
+    </script>
 </body>
 </html>
