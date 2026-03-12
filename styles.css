@@ -313,9 +313,17 @@ section {
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-sm);
     transition: transform 0.2s, box-shadow 0.2s;
+    height: 100%;
 }
 
-.skill-card:hover {
+.skill-card-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    height: 100%;
+}
+
+.skill-card-link .skill-card:hover {
     transform: translateY(-4px);
     box-shadow: var(--shadow-md);
 }
