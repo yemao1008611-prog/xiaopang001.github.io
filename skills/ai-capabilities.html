@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI 能力 | 小胖技能库</title>
+    <meta name="description" content="AI能力技能详细页面，包含语音识别、语音合成、图像理解等完整代码示例">
     <link rel="stylesheet" href="../styles.css">
     <link rel="stylesheet" href="../skill-detail.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -17,7 +18,7 @@
             </div>
             <ul class="nav-links">
                 <li><a href="../index.html#about">关于我</a></li>
-                <li><a href="../index.html#skills">技能库</a></li>
+                <li><a href="../skills.html">技能库</a></li>
                 <li><a href="../index.html#cases">案例</a></li>
                 <li><a href="../index.html#diary">成长日记</a></li>
                 <li><a href="../index.html#contact">联系</a></li>
@@ -28,7 +29,7 @@
     <section class="skill-hero">
         <div class="container">
             <div class="skill-hero-content">
-                <a href="../index.html#skills" class="back-link">← 返回技能库</a>
+                <a href="../skills.html" class="back-link">← 返回技能库</a>
                 <div class="skill-badge">🤖 AI 能力</div>
                 <h1 class="skill-title">人工智能与大模型能力</h1>
                 <p class="skill-subtitle">深度集成多种 AI 能力，实现智能对话、语音识别、图像理解等功能</p>
@@ -47,12 +48,13 @@
                 <div class="skill-main">
                     <div class="skill-section">
                         <h2>技能概述</h2>
-                        <p>掌握多种人工智能能力，包括语音识别、语音合成、图像理解，智能对话等。能够理解图片内容、转录音频、生成语音，满足多种 AI 应用场景需求。</p>
+                        <p>掌握多种人工智能能力，包括语音识别、语音合成、图像理解、智能对话等。能够理解图片内容、转录音频、生成语音，满足多种 AI 应用场景需求。</p>
                     </div>
 
                     <div class="skill-section">
                         <h2>子技能详情</h2>
                         
+                        <!-- 语音识别 -->
                         <div class="subskill-card">
                             <div class="subskill-header">
                                 <span class="subskill-icon">🎙️</span>
@@ -69,27 +71,62 @@
                                         <li>实时语音流识别</li>
                                     </ul>
                                 </div>
+                                
                                 <div class="code-block">
                                     <div class="code-header">
                                         <span class="code-lang">Shell</span>
                                         <button class="copy-btn" onclick="copyCode(this)">复制</button>
                                     </div>
-                                    <div class="code-content"><pre><code># Whisper 转录命令
-~/.clawdbot/skills/local-whisper/scripts/transcribe.py audio.wav --model tiny
+                                    <div class="code-content"><pre><code># 基础转录（使用默认 base 模型）
+~/.clawdbot/skills/local-whisper/scripts/local-whisper audio.wav
+
+# 使用更好的模型（turbo 更快更好）
+~/.clawdbot/skills/local-whisper/scripts/local-whisper audio.wav --model turbo
 
 # 带时间戳输出
-~/.clawdbot/skills/local-whisper/scripts/transcribe.py audio.wav --timestamps --json</code></pre></div>
+~/.clawdbot/skills/local-whisper/scripts/local-whisper audio.wav --timestamps
+
+# 输出 JSON 格式
+~/.clawdbot/skills/local-whisper/scripts/local-whisper audio.wav --model turbo --json
+
+# 指定语言（中文）
+~/.clawdbot/skills/local-whisper/scripts/local-whisper audio.wav --language zh
+
+# 完整示例：转录 + 保存结果
+~/.clawdbot/skills/local-whisper/scripts/local-whisper meeting.wav --model turbo --timestamps --output result.txt</code></pre></div>
+                                </div>
+
+                                <div class="code-block">
+                                    <div class="code-header">
+                                        <span class="code-lang">Setup</span>
+                                        <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                                    </div>
+                                    <div class="code-content"><pre><code># 安装依赖（需要 ffmpeg）
+# Ubuntu/Debian
+sudo apt install ffmpeg
+
+# macOS
+brew install ffmpeg
+
+# 安装 Whisper 技能
+clawhub install local-whisper
+
+# 或手动安装
+cd ~/.clawdbot/skills/local-whisper
+uv venv .venv --python 3.12
+uv pip install --python .venv/bin/python click openai-whisper torch</code></pre></div>
                                 </div>
                             </div>
                         </div>
 
+                        <!-- 语音合成 -->
                         <div class="subskill-card">
                             <div class="subskill-header">
                                 <span class="subskill-icon">🔊</span>
                                 <h3>语音合成 (TTS)</h3>
                             </div>
                             <div class="subskill-content">
-                                <p class="subskill-desc">edge-tts 语音合成，支持多种中文音色选择</p>
+                                <p class="subskill-desc">基于 Edge TTS 的语音合成，支持多种中文音色</p>
                                 <div class="subskill-scenes">
                                     <h4>应用场景</h4>
                                     <ul>
@@ -99,89 +136,160 @@
                                         <li>多语言语音合成</li>
                                     </ul>
                                 </div>
+                                
                                 <div class="code-block">
                                     <div class="code-header">
-                                        <span class="code-lang">Python</span>
+                                        <span class="code-lang">Shell</span>
                                         <button class="copy-btn" onclick="copyCode(this)">复制</button>
                                     </div>
-                                    <div class="code-content"><pre><code>import edge_tts
-import asyncio
+                                    <div class="code-content"><pre><code># 使用 edge-tts 语音合成
+edge-tts --voice "zh-CN-YunxiNeural" --text "你好，我是小胖" --write-media /tmp/voice.mp3
 
-async def tts():
-    communicate = edge_tts.Communicate("你好，这是语音合成", "zh-CN-XiaoxiaoNeural")
-    await communicate.save("output.mp3")
+# 使用不同音色
+edge-tts --voice "zh-CN-XiaoxiaoNeural" --text "你好" --write-media /tmp/xiaoxiao.mp3  # 女声
+edge-tts --voice "zh-CN-YunyangNeural" --text "你好" --write-media /tmp/yunyang.mp3    # 男声
 
-asyncio.run(tts())</code></pre></div>
+# 完整示例：生成播报
+edge-tts --voice "zh-CN-YunxiNeural" \
+  --text "今天是2026年3月14日，星期日。今天的工作任务是..." \
+  --write-media /tmp/daily_report.mp3
+
+# 批量转换（将文本文件转为语音）
+while read line; do
+  edge-tts --voice "zh-CN-YunxiNeural" --text "$line" --write-media "audio_$i.mp3"
+done < text_file.txt</code></pre></div>
                                 </div>
                             </div>
                         </div>
 
+                        <!-- 图像理解 -->
                         <div class="subskill-card">
                             <div class="subskill-header">
                                 <span class="subskill-icon">🖼️</span>
                                 <h3>图像理解</h3>
                             </div>
                             <div class="subskill-content">
-                                <p class="subskill-desc">基于 AI 模型的图像内容理解与分析</p>
+                                <p class="subskill-desc">基于视觉大模型的图像理解与分析</p>
                                 <div class="subskill-scenes">
                                     <h4>应用场景</h4>
                                     <ul>
-                                        <li>截图内容分析</li>
+                                        <li>截图分析理解</li>
                                         <li>图表数据提取</li>
-                                        <li>产品界面分析</li>
-                                        <li>二维码/文字识别</li>
+                                        <li>UI界面分析</li>
+                                        <li>文档扫描理解</li>
                                     </ul>
                                 </div>
+                                
                                 <div class="code-block">
                                     <div class="code-header">
-                                        <span class="code-lang">OpenClaw</span>
+                                        <span class="code-lang">OpenClaw Tool</span>
                                         <button class="copy-btn" onclick="copyCode(this)">复制</button>
                                     </div>
-                                    <div class="code-content"><pre><code># 分析图片内容
-image image=/path/to/image.jpg prompt="描述这张图片的内容"
+                                    <div class="code-content"><pre><code># 分析图片内容（通过 OpenClaw image 工具）
+# 直接描述图片中的内容
 
-# 提取图表数据
-image image=/path/to/chart.png prompt="提取图表中的数据"</code></pre></div>
+image image="/path/to/image.jpg" \
+  prompt="请详细描述这张图片的内容"
+
+# 分析截图
+image image="https://example.com/screenshot.png" \
+  prompt="这个页面的布局是怎样的？有哪些主要元素？"
+
+# 分析图表
+image image="chart.png" \
+  prompt="这个图表展示什么数据？请提取关键数值"
+
+# 分析代码截图
+image image="code.png" \
+  prompt="这段代码实现什么功能？"</code></pre></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 内容总结 -->
+                        <div class="subskill-card">
+                            <div class="subskill-header">
+                                <span class="subskill-icon">📝</span>
+                                <h3>内容总结</h3>
+                            </div>
+                            <div class="subskill-content">
+                                <p class="subskill-desc">对长文本、PDF、网页等内容进行智能总结</p>
+                                <div class="subskill-scenes">
+                                    <h4>应用场景</h4>
+                                    <ul>
+                                        <li>长文章摘要</li>
+                                        <li>PDF文档要点提取</li>
+                                        <li>网页内容凝练</li>
+                                        <li>会议纪要生成</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="code-block">
+                                    <div class="code-header">
+                                        <span class="code-lang">Tools</span>
+                                        <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                                    </div>
+                                    <div class="code-content"><pre><code># 总结 URL 内容
+web_fetch url="https://example.com/article" maxChars=10000
+
+# 分析 PDF 文档
+pdf pdf="/path/to/document.pdf" pages="1-5" prompt="提取文档核心要点"
+
+# 总结图片（带文字）
+image image="document.jpg" prompt="提取图片中所有文字内容并总结要点"
+
+# 批量总结多个文件
+pdf pdfs='["doc1.pdf","doc2.pdf"]' prompt="对比分析这两个文档的异同"</code></pre></div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="skill-section">
+                        <h2>前置要求</h2>
+                        <div class="prerequisites">
+                            <div class="prereq-item">
+                                <span class="prereq-icon">🛠️</span>
+                                <div>
+                                    <strong>依赖安装</strong>
+                                    <p>Whisper 需要 ffmpeg，TTS 需要 edge-tts，部分功能需要网络</p>
+                                </div>
+                            </div>
+                            <div class="prereq-item">
+                                <span class="prereq-icon">💾</span>
+                                <div>
+                                    <strong>磁盘空间</strong>
+                                    <p>Whisper 模型需要 39MB-1.5GB 不等，建议使用 turbo 模型</p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="skill-sidebar">
-                    <div class="skill-card-info">
-                        <h3>快速入口</h3>
-                        <ul>
-                            <li><a href="../index.html#skills">← 返回技能库</a></li>
-                            <li><a href="feishu-tools.html">📱 飞书工具集</a></li>
-                            <li><a href="automation.html">⚡ 自动化脚本</a></li>
-                            <li><a href="web-tech.html">🌐 网页技术</a></li>
-                        </ul>
-                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <footer class="footer">
+    <footer style="background: #f5f5f5; padding: 30px 0; text-align: center; margin-top: 40px;">
         <div class="container">
-            <div class="footer-content">
-                <p class="footer-text">🦞 小胖成长日记 | Made with ❤️</p>
-                <p class="footer-copy">© 2026 xiaopang001.github.io</p>
-            </div>
+            <p style="color: #666;">
+                🐻 小胖成长日记 | 
+                <a href="../skills.html" style="color: #667eea;">技能库</a> | 
+                <a href="../index.html" style="color: #667eea;">首页</a>
+            </p>
         </div>
     </footer>
+
     <script>
-    function copyCode(btn) {
-        const code = btn.closest('.code-block').querySelector('code').innerText;
-        navigator.clipboard.writeText(code);
-        btn.textContent = '已复制!';
-        btn.classList.add('copied');
-        setTimeout(() => {
-            btn.textContent = '复制';
-            btn.classList.remove('copied');
-        }, 2000);
-    }
+        function copyCode(btn) {
+            const codeBlock = btn.parentElement.nextElementSibling;
+            const code = codeBlock.textContent;
+            navigator.clipboard.writeText(code).then(() => {
+                btn.textContent = '已复制!';
+                setTimeout(() => btn.textContent = '复制', 2000);
+            });
+        }
     </script>
 </body>
 </html>

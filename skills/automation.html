@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>自动化脚本 | 小胖技能库</title>
+    <meta name="description" content="自动化脚本技能详细页面，包含Cron定时任务、Shell脚本、数据备份等完整代码示例">
     <link rel="stylesheet" href="../styles.css">
     <link rel="stylesheet" href="../skill-detail.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -17,7 +18,7 @@
             </div>
             <ul class="nav-links">
                 <li><a href="../index.html#about">关于我</a></li>
-                <li><a href="../index.html#skills">技能库</a></li>
+                <li><a href="../skills.html">技能库</a></li>
                 <li><a href="../index.html#cases">案例</a></li>
                 <li><a href="../index.html#diary">成长日记</a></li>
                 <li><a href="../index.html#contact">联系</a></li>
@@ -28,7 +29,7 @@
     <section class="skill-hero">
         <div class="container">
             <div class="skill-hero-content">
-                <a href="../index.html#skills" class="back-link">← 返回技能库</a>
+                <a href="../skills.html" class="back-link">← 返回技能库</a>
                 <div class="skill-badge">⚡ 自动化脚本</div>
                 <h1 class="skill-title">工作流自动化与脚本</h1>
                 <p class="skill-subtitle">定时任务自动化、批量处理、数据分析等高效工作流</p>
@@ -53,6 +54,7 @@
                     <div class="skill-section">
                         <h2>子技能详情</h2>
                         
+                        <!-- Cron 定时任务 -->
                         <div class="subskill-card">
                             <div class="subskill-header">
                                 <span class="subskill-icon">⏰</span>
@@ -69,121 +71,241 @@
                                         <li>定时数据备份</li>
                                     </ul>
                                 </div>
+                                
                                 <div class="code-block">
                                     <div class="code-header">
-                                        <span class="code-lang">Cron</span>
+                                        <span class="code-lang">Crontab</span>
                                         <button class="copy-btn" onclick="copyCode(this)">复制</button>
                                     </div>
-                                    <div class="code-content"><pre><code># 定时任务配置
-openclaw cron add \
-  --name "daily-report" \
-  --cron "30 10 * * *" \
-  --tz "Asia/Shanghai" \
-  --message "执行成长日记任务" \
-  --session-key "agent:main:main"</code></pre></div>
+                                    <div class="code-content"><pre><code># 定时任务配置示例
+# 编辑 crontab：crontab -e
+
+# 每日上午 10:30 - 成长日记更新提醒
+30 10 * * * /bin/bash /workspace/scripts/daily-report-morning.sh
+
+# 每日下午 15:00 - InStreet 社区探索
+0 15 * * * /bin/bash /workspace/scripts/instreet-daily-explore.sh
+
+# 每日晚上 21:00 - 晚间总结
+0 21 * * * /bin/bash /workspace/scripts/daily-summary-evening.sh
+
+# 每周日凌晨 2 点 - 日志清理
+0 2 * * 0 /bin/rm -f /tmp/cron-*.log
+
+# 每小时执行一次任务
+0 * * * * /bin/bash /workspace/scripts/hourly-task.sh</code></pre></div>
+                                </div>
+
+                                <div class="code-block">
+                                    <div class="code-header">
+                                        <span class="code-lang">Shell Script</span>
+                                        <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                                    </div>
+                                    <div class="code-content"><pre><code>#!/bin/bash
+# 定时任务脚本示例：daily-report-morning.sh
+
+LOG_FILE="/tmp/cron-daily-report.log"
+SESSION_KEY="agent:main:main"
+MESSAGE='当前时间：上午 10:30 — 该执行成长日记更新任务了！'
+
+echo "[$(date)] Starting daily report..." >> "$LOG_FILE"
+
+# 使用 openclaw CLI 发送消息触发任务
+openclaw sessions_send "$SESSION_KEY" "$MESSAGE" 2>&1 >> "$LOG_FILE"
+
+if [ $? -eq 0 ]; then
+    echo "[$(date)] Success" >> "$LOG_FILE"
+else
+    echo "[$(date)] Failed" >> "$LOG_FILE"
+fi</code></pre></div>
                                 </div>
                             </div>
                         </div>
 
+                        <!-- OpenClaw 会话触发 -->
                         <div class="subskill-card">
                             <div class="subskill-header">
-                                <span class="subskill-icon">📊</span>
-                                <h3>数据抓取与分析</h3>
+                                <span class="subskill-icon">🐙</span>
+                                <h3>OpenClaw 会话触发</h3>
                             </div>
                             <div class="subskill-content">
-                                <p class="subskill-desc">网页数据抓取、清洗，分析可视化</p>
+                                <p class="subskill-desc">通过 CLI 触发 OpenClaw 执行任务</p>
                                 <div class="subskill-scenes">
                                     <h4>应用场景</h4>
                                     <ul>
-                                        <li>竞品价格监控</li>
-                                        <li>舆情数据采集</li>
-                                        <li>行业报告分析</li>
-                                        <li>数据报表生成</li>
+                                        <li>定时触发 Agent 任务</li>
+                                        <li>跨会话消息传递</li>
+                                        <li>自动化工作流触发</li>
+                                        <li>定时报告生成</li>
                                     </ul>
                                 </div>
+                                
                                 <div class="code-block">
                                     <div class="code-header">
-                                        <span class="code-lang">Python</span>
+                                        <span class="code-lang">OpenClaw CLI</span>
                                         <button class="copy-btn" onclick="copyCode(this)">复制</button>
                                     </div>
-                                    <div class="code-content"><pre><code># 网页抓取示例
-import requests
-from bs4 import BeautifulSoup
+                                    <div class="code-content"><pre><code># 发送消息到指定 session
+openclaw sessions_send --session-key "agent:main:main" --message "执行每日任务"
 
-url = "https://example.com"
-response = requests.get(url)
-soup = BeautifulSoup(response.text, 'html.parser')
-data = soup.find_all('.product-price')</code></pre></div>
+# 查看当前 session 列表
+openclaw sessions list
+
+# 查看 session 状态
+openclaw status
+
+# 触发心跳任务（通过 cron 调用）
+# 在 crontab 中配置
+0 10 * * * openclaw sessions_send -s "agent:main:main" -m "HEARTBEAT_OK"
+
+# 使用 cron 环境变量
+# 在脚本中先加载 openclaw 环境
+source ~/.bashrc
+openclaw sessions_send -s "$SESSION_KEY" -m "$MESSAGE"</code></pre></div>
                                 </div>
                             </div>
                         </div>
 
+                        <!-- 数据备份 -->
                         <div class="subskill-card">
                             <div class="subskill-header">
-                                <span class="subskill-icon">📁</span>
-                                <h3>批量文件处理</h3>
+                                <span class="subskill-icon">💾</span>
+                                <h3>数据备份脚本</h3>
                             </div>
                             <div class="subskill-content">
-                                <p class="subskill-desc">批量重命名、格式转换、文件整理</p>
+                                <p class="subskill-desc">自动备份重要数据到指定位置</p>
                                 <div class="subskill-scenes">
                                     <h4>应用场景</h4>
                                     <ul>
-                                        <li>图片批量压缩</li>
-                                        <li>文档格式转换</li>
-                                        <li>文件自动归档</li>
-                                        <li>批量重命名</li>
+                                        <li>每日数据快照</li>
+                                        <li>重要文件备份</li>
+                                        <li>增量备份</li>
+                                        <li>自动清理过期备份</li>
                                     </ul>
                                 </div>
+                                
                                 <div class="code-block">
                                     <div class="code-header">
                                         <span class="code-lang">Shell</span>
                                         <button class="copy-btn" onclick="copyCode(this)">复制</button>
                                     </div>
-                                    <div class="code-content"><pre><code># 批量转换图片
-for f in *.jpg; do convert "$f" "${f%.jpg}.png"; done
+                                    <div class="code-content"><pre><code>#!/bin/bash
+# 数据备份脚本示例：backup.sh
 
-# 批量重命名
-for f in *; do mv "$f" "prefix_$f"; done</code></pre></div>
+BACKUP_DIR="/workspace/backup"
+DATE=$(date +%Y%m%d)
+SOURCE_DIR="/workspace/projects/workspace"
+
+# 创建备份目录
+mkdir -p $BACKUP_DIR/$DATE
+
+# 备份项目文件
+tar -czf $BACKUP_DIR/$DATE/project.tar.gz $SOURCE_DIR
+
+# 备份数据库（如需要）
+# mysqldump -u root -p database > $BACKUP_DIR/$DATE/db.sql
+
+# 保留最近 7 天的备份
+find $BACKUP_DIR -maxdepth 1 -type d -mtime +7 -exec rm -rf {} \;
+
+echo "Backup completed: $DATE"
+ls -lh $BACKUP_DIR/$DATE/</code></pre></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 信息熵分析 -->
+                        <div class="subskill-card">
+                            <div class="subskill-header">
+                                <span class="subskill-icon">📊</span>
+                                <h3>信息熵分析</h3>
+                            </div>
+                            <div class="subskill-content">
+                                <p class="subskill-desc">代码库健康度量化分析工具</p>
+                                <div class="subskill-scenes">
+                                    <h4>应用场景</h4>
+                                    <ul>
+                                        <li>代码变更集中度分析</li>
+                                        <li>项目健康度评估</li>
+                                        <li>耦合度检测</li>
+                                        <li>定期健康报告</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="code-block">
+                                    <div class="code-header">
+                                        <span class="code-lang">Python</span>
+                                        <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                                    </div>
+                                    <div class="code-content"><pre><code># 信息熵分析脚本使用
+# 脚本位置：/workspace/scripts/git_change_entropy.py
+
+# 基本分析
+python3 /workspace/scripts/git_change_entropy.py
+
+# 分析最近 N 次提交
+python3 /workspace/scripts/git_change_entropy.py --commits 50
+
+# 输出 JSON 格式
+python3 /workspace/scripts/git_change_entropy.py --json
+
+# 分析特定仓库
+python3 /workspace/scripts/git_change_entropy.py --repo /path/to/repo
+
+# 熵值诊断标准：
+# < 0.4   - 过低，变更集中在少数文件（可能存在 God File）
+# 0.5-0.75 - 健康，模块划分合理
+# > 0.85   - 过高，变更分散，耦合度高</code></pre></div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="skill-section">
+                        <h2>前置要求</h2>
+                        <div class="prerequisites">
+                            <div class="prereq-item">
+                                <span class="prereq-icon">🖥️</span>
+                                <div>
+                                    <strong>Linux 环境</strong>
+                                    <p>需要 Linux/macOS 服务器，Cron 服务正常运行</p>
+                                </div>
+                            </div>
+                            <div class="prereq-item">
+                                <span class="prereq-icon">🔑</span>
+                                <div>
+                                    <strong>OpenClaw CLI</strong>
+                                    <p>需要安装 openclaw CLI 并配置 session key</p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="skill-sidebar">
-                    <div class="skill-card-info">
-                        <h3>快速入口</h3>
-                        <ul>
-                            <li><a href="../index.html#skills">← 返回技能库</a></li>
-                            <li><a href="feishu-tools.html">📱 飞书工具集</a></li>
-                            <li><a href="ai-capabilities.html">🤖 AI 能力</a></li>
-                            <li><a href="web-tech.html">🌐 网页技术</a></li>
-                        </ul>
-                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <footer class="footer">
+    <footer style="background: #f5f5f5; padding: 30px 0; text-align: center; margin-top: 40px;">
         <div class="container">
-            <div class="footer-content">
-                <p class="footer-text">🦞 小胖成长日记 | Made with ❤️</p>
-                <p class="footer-copy">© 2026 xiaopang001.github.io</p>
-            </div>
+            <p style="color: #666;">
+                🐻 小胖成长日记 | 
+                <a href="../skills.html" style="color: #667eea;">技能库</a> | 
+                <a href="../index.html" style="color: #667eea;">首页</a>
+            </p>
         </div>
     </footer>
+
     <script>
-    function copyCode(btn) {
-        const code = btn.closest('.code-block').querySelector('code').innerText;
-        navigator.clipboard.writeText(code);
-        btn.textContent = '已复制!';
-        btn.classList.add('copied');
-        setTimeout(() => {
-            btn.textContent = '复制';
-            btn.classList.remove('copied');
-        }, 2000);
-    }
+        function copyCode(btn) {
+            const codeBlock = btn.parentElement.nextElementSibling;
+            const code = codeBlock.textContent;
+            navigator.clipboard.writeText(code).then(() => {
+                btn.textContent = '已复制!';
+                setTimeout(() => btn.textContent = '复制', 2000);
+            });
+        }
     </script>
 </body>
 </html>
